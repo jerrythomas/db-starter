@@ -1,0 +1,8 @@
+load:
+  location: import
+  tables:
+    - config.lookup
+    - config.lookup_value
+  before:
+    - seed.sql
+  after: []

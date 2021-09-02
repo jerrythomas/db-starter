@@ -1,0 +1,36 @@
+Project Sample {
+  database_type: 'PostgreSQL'
+  note: '''
+    # Database Design
+    
+    
+    '''
+}
+
+Table lookup {
+  id           uuid [pk, default: `uuid_generate_v4()`]
+  name         varchar(30)
+  modified_on  timestamp [not null, default: `now()`]
+  modified_by  uuid
+
+  Note {
+    'Lookups'
+  }
+}
+
+Table lookup_values {
+  id           uuid [pk, default: `uuid_generate_v4()`]
+  name         varchar(30)
+  lookup_id    uuid [ref: > lookup.id]
+  modified_on  timestamp [not null, default: `now()`]
+  modified_by  uuid
+
+  Note {
+    'Lookup values'
+  }
+}
+
+TableGroup staging {
+  lookup
+  lookup_values
+}
